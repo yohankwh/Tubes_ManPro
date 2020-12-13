@@ -21,8 +21,9 @@ Route::get('/', function () {
 
 //ADMIN ROUTES
 Route::get('/admin', 'AdminController@index')->name("admin.index");
-Route::get('/admin/berita/create','AdminController@createBerita')->name('berita.create');
-Route::get('/admin/berita/','AdminController@viewBerita')->name('berita.viewBerita');
-Route::post('/admin/berita/{slug}','AdminController@updateBerita')->name('berita.update');
-Route::get('/admin/berita/{slug}/edit','AdminController@editBerita')->name('berita.edit');
-Route::post('/admin/berita/{slug}','AdminController@updateBerita')->name('berita.update');
+Route::get('/admin/berita/create', 'AdminController@createBerita')->name('berita.create');
+Route::get('/admin/berita/', 'AdminController@viewBerita')->name('berita.viewBerita');
+Route::post('/admin/berita/{slug}', 'AdminController@updateBerita')->name('berita.update');
+Route::get('/admin/berita/{slug}/edit', 'AdminController@editBerita')->name('berita.edit');
+Route::post('/admin/berita/{slug}', 'AdminController@updateBerita')->name('berita.update');
+Route::get('/coba', 'AdminController@coba');

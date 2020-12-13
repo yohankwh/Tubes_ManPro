@@ -3,9 +3,10 @@
 
 <head>
 
-  <link rel="shortcut icon" type="image/png" href="{{asset('img/favicon-ganesia - earlier.png')}}"/>
+  <link rel="shortcut icon" type="image/png" href="{{asset('img/favicon-ganesia - earlier.png')}}" />
   <link rel="stylesheet" type="text/css" href="{{asset('css/styles.css')}}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -15,7 +16,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  
+
 
   <title>Pusat Informasi COVID-19</title>
 
@@ -23,11 +24,12 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="{{asset('css/asb-admin-2.min.css')}}" rel="stylesheet"> 
+  <link href="{{asset('css/asb-admin-2.min.css')}}" rel="stylesheet">
 
   @yield('custom')
-  
+
 </head>
+
 <body class="container">
   @if((request()->is('register')))
 

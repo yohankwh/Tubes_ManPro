@@ -6,15 +6,23 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('admin.index');
     }
 
-    public function inputBerita(){
+    public function inputBerita()
+    {
         return "input berita";
     }
 
-    public function editBerita(){
+    public function editBerita()
+    {
         return "edit berita";
+    }
+
+    public function coba()
+    {
+        return view('admin.berita');
     }
 }
