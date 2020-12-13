@@ -11,6 +11,11 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
+    public function berita()
+    {
+        // return view('');
+    }
+
     public function inputBerita()
     {
         return "input berita";
@@ -19,10 +24,5 @@ class AdminController extends Controller
     public function editBerita()
     {
         return "edit berita";
-    }
-
-    public function coba()
-    {
-        return view('admin.berita');
     }
 }
