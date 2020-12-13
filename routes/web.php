@@ -27,3 +27,4 @@ Route::get('/admin/berita/{slug}', 'AdminController@viewBerita')->name('berita.v
 Route::post('/admin/berita/{slug}', 'AdminController@updateBerita')->name('berita.update');
 Route::get('/admin/berita/{slug}/edit', 'AdminController@editBerita')->name('berita.edit');
 Route::post('/admin/berita/{slug}', 'AdminController@updateBerita')->name('berita.update');
+Route::get('/admin/berita', 'AdminController@berita');

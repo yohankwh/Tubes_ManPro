@@ -13,7 +13,7 @@ class AdminController extends Controller
 
     public function berita()
     {
-        // return view('');
+        return view('admin.berita');
     }
 
     public function inputBerita()
