@@ -14,8 +14,8 @@ class AdminController extends Controller
         // return view('');
     }
 
-    public function inputBerita(){
-        return "input berita";
+    public function createBerita(){
+        return view('admin.createberita');
     }
 
     public function editBerita(){
