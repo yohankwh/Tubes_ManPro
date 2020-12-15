@@ -1,0 +1,29 @@
+body{
+    background-color: #EBEEF1;
+}
+body, h1, h2, h3, h4, h5, h6{
+    font-family: "Lato", sans-serif
+}
+.w3-bar, h1, button{
+    font-family: "Montserrat", sans-serif
+}
+.fa-anchor, .fa-coffee {
+    font-size:200px
+}
+.navbar, .header{
+    background-color: #3B9778;
+}
+.header{
+    background-color: #93E9BE;
+}
+.column {
+    float: left;
+    width: 32%;
+    margin: 9px;
+    background-color: #93E9BE;
+}
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
