@@ -1,0 +1,11 @@
+.row-highlight-r {
+    background-color: rgba(249, 169, 95, 0.849) !important;
+}
+.row-highlight-g {
+    background-color: rgba(95, 249, 164, 0.849) !important;
+}
+.hdr-img{
+    width: 448px;
+    height: 296px;
+    overflow: hidden;
+}
