@@ -26,5 +26,6 @@ Route::post('/admin/berita', 'AdminController@postBerita')->name("berita.post");
 Route::get('/admin/berita/create','AdminController@createBerita')->name('berita.create');
 Route::get('/admin/berita/{slug}','AdminController@viewBerita')->name('berita.view');
 Route::post('/admin/berita/{slug}','AdminController@updateBerita')->name('berita.update');
+Route::post('/admin/berita/{slug}/delete','AdminController@deleteBerita')->name('berita.delete');
 Route::get('/admin/berita/{slug}/edit','AdminController@editBerita')->name('berita.edit');
 Route::post('/admin/berita/{slug}','AdminController@updateBerita')->name('berita.update');

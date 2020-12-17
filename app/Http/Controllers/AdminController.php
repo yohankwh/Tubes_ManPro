@@ -63,5 +63,14 @@ class AdminController extends Controller
         }
     }
 
+    public function deleteBerita($id){
+        $berita = Berita::where('id',$id)->first();
+
+        if($berita){
+            $berita->delete();
+        }
+        return redirect(route('admin.berita'));
+    }
+
  
 }
