@@ -15,6 +15,11 @@ class CreateKasusDaerahsTable extends Migration
     {
         Schema::create('kasus_daerah', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->date('tanggal');
+            $table->string('daerah');
+            $table->integer('positif');
+            $table->integer('sembuh');
+            $table->integer('meninggal');
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ class CreateKasusDaerahsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kasus_daerahs');
+        Schema::dropIfExists('kasus_daerah');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDemografisTable extends Migration
+class CreateKasusUmumsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class CreateDemografisTable extends Migration
      */
     public function up()
     {
-        Schema::create('demografi', function (Blueprint $table) {
+        Schema::create('kasus_umum', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->date('tanggal');
+            $table->integer('positif');
+            $table->integer('sembuh');
+            $table->integer('meninggal');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreateDemografisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('demografis');
+        Schema::dropIfExists('kasus_umum');
     }
 }
