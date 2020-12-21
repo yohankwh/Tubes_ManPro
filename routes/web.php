@@ -28,3 +28,4 @@ Route::get('/admin/berita/{slug}','AdminController@viewBerita')->name('berita.vi
 Route::post('/admin/berita/{slug}','AdminController@updateBerita')->name('berita.update');
 Route::get('/admin/berita/{slug}/edit','AdminController@editBerita')->name('berita.edit');
 Route::post('/admin/berita/{slug}','AdminController@updateBerita')->name('berita.update');
+Route::get('/infoedu', 'InfoEduController@index');
