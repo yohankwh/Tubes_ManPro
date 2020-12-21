@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKasusDaerahsTable extends Migration
+class AddTitleToBerita extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateKasusDaerahsTable extends Migration
      */
     public function up()
     {
-        Schema::create('kasus_daerah', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+        Schema::table('berita', function (Blueprint $table) {
+            $table->string('title');
         });
     }
 
@@ -26,6 +25,8 @@ class CreateKasusDaerahsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kasus_daerahs');
+        Schema::table('berita', function (Blueprint $table) {
+            $table->dropColumn('title');
+        });
     }
 }

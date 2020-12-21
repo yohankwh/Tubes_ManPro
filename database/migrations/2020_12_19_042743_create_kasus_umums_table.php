@@ -15,6 +15,10 @@ class CreateKasusUmumsTable extends Migration
     {
         Schema::create('kasus_umum', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->date('tanggal');
+            $table->integer('positif');
+            $table->integer('sembuh');
+            $table->integer('meninggal');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreateKasusUmumsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kasus_umums');
+        Schema::dropIfExists('kasus_umum');
     }
 }
