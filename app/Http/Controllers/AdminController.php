@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Berita;
 use App\KasusUmum;
 use App\KasusDaerah;
@@ -12,10 +13,45 @@ use Illuminate\Support\Facades\Response;
 class AdminController extends Controller
 {
     public function index(){
-        return view('admin.index');
+        if(!Auth::check()){
+            return redirect()->route('login');
+        }
+
+        $all_berita = Berita::orderBy('created_at','desc')->take(3)->get();
+        $kasus_umum = KasusUmum::orderBy('tanggal','desc')->get();
+        $demografi = Demografi::orderBy('tanggal','desc')->get();
+        $list_daerah = KasusDaerah::orderBy('tanggal','desc')->get();
+
+        // foreach($kasus_umum as $kasus){
+        //     $kasus->tglnum = strtotime($kasus->tanggal);
+        //     $kasus->tanggal = date('Y-m-d',$kasus->tglnum);
+        // }
+
+        // foreach($demografi as $demo){
+        //     $demo->tglnum = strtotime($demo->tanggal);
+        //     $demo->tanggal = date('Y-m-d',$demo->tglnum);
+        // }
+
+        // foreach($list_daerah as $daerah){
+        //     $daerah->tglnum = strtotime($daerah->tanggal);
+        //     $daerah->tanggal = date('Y-m-d',$daerah->tglnum);
+        // }
+
+        $data = [
+            'all_berita' => $all_berita,
+            'kasusUmum' => $kasus_umum,
+            'demografi' => $demografi,
+            'listDaerah' => $list_daerah
+        ];
+
+        return view('admin.index')->with($data);
     }
     
     public function berita(){
+        if(!Auth::check()){
+            return redirect()->route('login');
+        }
+
         $all_berita = Berita::orderBy('created_at','desc')->get();
         
         $data = [
@@ -26,20 +62,27 @@ class AdminController extends Controller
     }
 
     public function kasus(){
+        if(!Auth::check()){
+            return redirect()->route('login');
+        }
+        
         $kasus_umum = KasusUmum::all();
         $demografi = Demografi::all();
         $list_daerah = KasusDaerah::all();
 
         foreach($kasus_umum as $kasus){
-            $kasus->tanggal = date('d/m/Y',strtotime($kasus->tanggal));
+            $kasus->tglnum = strtotime($kasus->tanggal);
+            $kasus->tanggal = date('Y-m-d',$kasus->tglnum);
         }
 
         foreach($demografi as $demo){
-            $demo->tanggal = date('d/m/Y',strtotime($demo->tanggal));
+            $demo->tglnum = strtotime($demo->tanggal);
+            $demo->tanggal = date('Y-m-d',$demo->tglnum);
         }
 
         foreach($list_daerah as $daerah){
-            $daerah->tanggal = date('d/m/Y',strtotime($daerah->tanggal));
+            $daerah->tglnum = strtotime($daerah->tanggal);
+            $daerah->tanggal = date('Y-m-d',$daerah->tglnum);
         }
 
         $data = [
@@ -52,6 +95,10 @@ class AdminController extends Controller
     }
 
     public function viewBerita($id){
+        if(!Auth::check()){
+            return redirect()->route('login');
+        }
+        
         $berita = Berita::where('id',$id)->first();
 
         if($berita){
@@ -66,10 +113,18 @@ class AdminController extends Controller
     }
 
     public function createBerita(){
+        if(!Auth::check()){
+            return redirect()->route('login');
+        }
+
         return view('admin.berita.create');
     }
 
     public function postBerita(Request $request){
+        if(!Auth::check()){
+            return redirect()->route('login');
+        }
+
         $berita = new Berita();
         $berita->title = $request->input('title');
         $berita->content = $request->input('content');
@@ -80,6 +135,10 @@ class AdminController extends Controller
     }
 
     public function editBerita($id){
+        if(!Auth::check()){
+            return redirect()->route('login');
+        }
+
         $berita = Berita::where('id',$id)->first();
 
         if($berita){
@@ -94,6 +153,10 @@ class AdminController extends Controller
     }
 
     public function updateBerita(Request $request, $id){
+        if(!Auth::check()){
+            return redirect()->route('login');
+        }
+
         $berita = Berita::where('id',$id)->first();
 
         if($berita){
@@ -109,6 +172,10 @@ class AdminController extends Controller
     }
 
     public function deleteBerita($id){
+        if(!Auth::check()){
+            return redirect()->route('login');
+        }
+
         $berita = Berita::where('id',$id)->first();
 
         if($berita){
@@ -118,10 +185,18 @@ class AdminController extends Controller
     }
 
     public function createKasus(){
+        if(!Auth::check()){
+            return redirect()->route('login');
+        }
+
         return view('admin.kasus.create');
     }
 
     public function inputKasusUmum(Request $request){
+        if(!Auth::check()){
+            return redirect()->route('login');
+        }
+
         $selectedDate = $request->input('tanggalVal');
 
         $type = "default";
@@ -142,7 +217,7 @@ class AdminController extends Controller
 
         $tag = $request->input('tag');
 
-        $formattedDate = date('d/m/Y',strtotime($kasus->tanggal));
+        $formattedDate = date('Y-m-d',strtotime($kasus->tanggal));
 
         return Response::json(array('success' => true, 
         'message' => 'success',
@@ -151,6 +226,10 @@ class AdminController extends Controller
         'date' => $formattedDate), 200);
     }
     public function inputKasusDaerah(Request $request){
+        if(!Auth::check()){
+            return redirect()->route('login');
+        }
+
         $selectedDate = $request->input('tanggalVal');
         $daerah = $request->input('daerahVal');
 
@@ -175,7 +254,7 @@ class AdminController extends Controller
 
         $tag = $request->input('tag');
 
-        $formattedDate = date('d/m/Y',strtotime($kasus->tanggal));
+        $formattedDate = date('Y-m-d',strtotime($kasus->tanggal));
 
         return Response::json(array('success' => true, 
         'message' => 'success',
@@ -184,6 +263,10 @@ class AdminController extends Controller
         'date' => $formattedDate), 200);
     }
     public function inputDemografi(Request $request){
+        if(!Auth::check()){
+            return redirect()->route('login');
+        }
+
         $selectedDate = $request->input('tanggalVal');
         $umur = $request->input('umurVal');
 
@@ -207,7 +290,7 @@ class AdminController extends Controller
 
         $tag = $request->input('tag');
 
-        $formattedDate = date('d/m/Y',strtotime($kasus->tanggal));
+        $formattedDate = date('Y-m-d',strtotime($kasus->tanggal));
 
         return Response::json(array('success' => true, 
         'message' => 'success',

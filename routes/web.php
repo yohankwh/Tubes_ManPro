@@ -37,3 +37,6 @@ Route::post('admin/kasus/create-ku','AdminController@inputKasusUmum')->name('kas
 Route::post('admin/kasus/create-kd','AdminController@inputKasusDaerah')->name('kasus.createKD');
 Route::post('admin/kasus/create-demo','AdminController@inputDemografi')->name('kasus.createDemo');
 // Route::get('admin/kasus/create','AdminController@createKasus')->name('kasus.create');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
