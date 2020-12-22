@@ -34,12 +34,12 @@
 <br>
 
 <div class="container">
-    <span style="font-size:2rem"><b>News Update</b></span>
+    <span class="container" style="font-size:2rem"><b>News Update</b></span>
     <div class="container">
     <div class="row justify-content-center my-5">
         <div class="table-responsive col-12">
             <table class="table table-bordered">
-            <thead class="table-dark">
+            <thead class="table-info">
                 <tr>
                 <th style="width: 5%">No</th>
                     <th style="width: 15%">Date</th>
@@ -58,5 +58,29 @@
             </table>
         </div>
     </div>
+
+    <span style="font-size:2rem"><b>Call Center</b></span>
+    <div class="row justify-content-center my-5">
+        <div class="table-responsive col-12">
+            <table class="table table-bordered">
+            <thead class="table-info">
+                <tr>
+                <th style="width: 5%">No</th>
+                    <th style="width: 30%">Hospital</th>
+                    <th style="width: 40%">Address</th>
+                    <th style="width: 35%">Phone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Hospital Name</td>
+                    <td>Hospital Address</td>
+                    <td>0221234567</td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+
 </div>
 @endsection
