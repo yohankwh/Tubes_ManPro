@@ -122,6 +122,10 @@ button:hover{
     </div>
   </div>
 </div>
+<br>
+<div class="center w3-container w3-round-large w3-card-4 w3-white">
+  <img src="img/infoedu_edu_1.jpg" alt="" style="width:100%">
+</div><br>
 
 <br>
 <h2 class="w3-center"id="infosection"><b>해야 할 일</b></h2>
@@ -135,7 +139,7 @@ button:hover{
     <a href="#" ><h5>증상 확인</h5></a>
   </button>
 </div>
-<br>
+<br><br>
 <h2 class="w3-center"><b>알아야 할 사항</b></h2>
 <div class="center2 w3-container w3-round-large w3-card-4 w3-white" style="margin-top:50px;">
   <h3><b>조짐</b></h3>
@@ -197,8 +201,16 @@ button:hover{
     </div> <br>
   </div>
 </div>
-</div>
+</div><br><br>
 
+<!-- untuk call center -->
+<div class="center w3-container w3-round-large w3-card-4 w3-white">
+  
+</div><br><br>
+<!-- untuk berita -->
+<div class="center w3-container w3-round-large w3-card-4 w3-white">
+  
+</div><br><br>
 
 <script>
 var myIndex = 0;
