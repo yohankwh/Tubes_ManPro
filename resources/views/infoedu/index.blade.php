@@ -95,6 +95,24 @@ button{
 button:hover{
   background-color:#e3a481;
 }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+  background-color: #009999;
+  color: white;
+}
+
 </style>
 @endsection
 @section('content')
@@ -205,7 +223,70 @@ button:hover{
 
 <!-- untuk call center -->
 <div class="center w3-container w3-round-large w3-card-4 w3-white">
-  
+  <h2><b> Call Center </b></h2><br>
+    <table>
+      <tr>
+        <th>No</th>
+        <th>Provinsi</th>
+        <th>Call Center</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Busan</td>
+        <td>221</td>       
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Incheon</td>
+        <td>222</td> 
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Ulsan</td>
+        <td>223</td>      
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Gyeonggi</td>
+        <td>224</td>  
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Gangwon</td>
+        <td>225</td>  
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>North Chungcheong</td>
+        <td>226</td>  
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>South Chungcheong</td>
+        <td>227</td>  
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>North Jeolla </td>
+        <td>228</td>  
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>South Jeolla</td>
+        <td>229</td>  
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>North Gyeongsang</td>
+        <td>210</td>  
+      </tr>
+      <tr>
+        <td>11</td>
+        <td>South Gyeongsang </td>
+        <td>211</td>  
+      </tr>
+
+    </table>
 </div><br><br>
 <!-- untuk berita -->
 <div class="center w3-container w3-round-large w3-card-4 w3-white">
