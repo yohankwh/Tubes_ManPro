@@ -36,6 +36,9 @@ Route::get('admin/kasus','AdminController@kasus')->name('admin.kasus');
 Route::post('admin/kasus/create-ku','AdminController@inputKasusUmum')->name('kasus.createKU');
 Route::post('admin/kasus/create-kd','AdminController@inputKasusDaerah')->name('kasus.createKD');
 Route::post('admin/kasus/create-demo','AdminController@inputDemografi')->name('kasus.createDemo');
+Route::get('admin/importBulkKU','AdminController@bulkImportCSVKU');
+Route::get('admin/importBulkKD','AdminController@bulkImportCSVKD');
+Route::get('admin/importBulkDemo','AdminController@bulkImportCSVDemo');
 // Route::get('admin/kasus/create','AdminController@createKasus')->name('kasus.create');
 Auth::routes();
 

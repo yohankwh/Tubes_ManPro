@@ -9,6 +9,9 @@ use App\KasusUmum;
 use App\KasusDaerah;
 use App\Demografi;
 use Illuminate\Support\Facades\Response;
+use League\Csv\Reader;
+use App\User;
+use File;
 
 class AdminController extends Controller
 {
@@ -297,5 +300,57 @@ class AdminController extends Controller
         'targetId' => $kasus->id,
         'type' => $type,
         'date' => $formattedDate), 200);
+    }
+
+    public function bulkImportCSVKU(){
+        $csv = Reader::createFromPath(storage_path('app/public/import/timeDiff.csv'), 'r');
+        $csv->setHeaderOffset(0);
+        
+        foreach ($csv as $row) {
+            if($row['confirmed']!=""){
+                $kasus = new KasusUmum();
+                $kasus->tanggal = $row['date'];
+                $kasus->positif = $row['confirmed'];
+                $kasus->sembuh = $row['released'];
+                $kasus->meninggal = $row['deceased'];
+                $kasus->save();
+            }
+        }
+        return redirect()->route('admin.kasus');
+    }
+
+    public function bulkImportCSVKD(){
+        $csv = Reader::createFromPath(storage_path('app/public/import/timeProvinceDiff.csv'), 'r');
+        $csv->setHeaderOffset(0);
+        
+        foreach ($csv as $row) {
+            if($row['confirmed']!=""){
+                $kasus = new KasusDaerah();
+                $kasus->tanggal = $row['date'];
+                $kasus->daerah = $row['province'];
+                $kasus->positif = $row['confirmed'];
+                $kasus->sembuh = $row['released'];
+                $kasus->meninggal = $row['deceased'];
+                $kasus->save();
+            }
+        }
+        return redirect()->route('admin.kasus');
+    }
+
+    public function bulkImportCSVDemo(){
+        $csv = Reader::createFromPath(storage_path('app/public/import/timeAgeDiff.csv'), 'r');
+        $csv->setHeaderOffset(0);
+        
+        foreach ($csv as $row) {
+            if($row['confirmed']!=""){
+                $kasus = new Demografi();
+                $kasus->tanggal = $row['date'];
+                $kasus->kel_umur = $row['age'];
+                $kasus->positif = $row['confirmed'];
+                $kasus->meninggal = $row['deceased'];
+                $kasus->save();
+            }
+        }
+        return redirect()->route('admin.kasus');
     }
 }
