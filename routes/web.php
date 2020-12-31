@@ -11,11 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 //GRAPHSTAT ROUTES
+Route::get('/', 'StatController@index')->name('index');
+Route::get('/statistik', 'StatController@statistik')->name('statistik');
+Route::get('/sebaran-kasus', 'StatController@sebaranKasus')->name('sebaran');
 
 //INFO ROUTES
 

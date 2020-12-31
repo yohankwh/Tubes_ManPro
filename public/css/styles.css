@@ -1,3 +1,12 @@
+*{
+  font-family: "Montserrat", sans-serif;;
+}
+
+html {
+  overflow: -moz-scrollbars-vertical; 
+  overflow-y: scroll;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -8,6 +17,60 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+/* INFO EDU */
+body{
+  background-color: #EBEEF1;
+}
+body, h1, h2, h3, h4, h5, h6, .mini-nav, .text-lato{
+  font-family: "Lato", sans-serif
+}
+.w3-bar, h1, button{
+  font-family: "Montserrat", sans-serif
+}
+.fa-anchor, .fa-coffee {
+  font-size:200px
+}
+.navbar-main{
+  background-color: #e9fff3 !important;
+}
+.nav-item-main{
+  font-size: 1em;
+  color: #000;
+}
+.nav-item-main a:hover{
+  color: #3B9778 !important;
+  text-decoration: none;
+}
+.nav-active{
+  color: #3B9778 !important;
+  text-decoration: none;
+}
+#nav-contact{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  transition: top 0.3s;
+}
+.header{
+  background-image: linear-gradient(to right, #3B9778,#93E9BE);
+  /* background-color: #93E9BE; */
+  height: 20em;
+  /* height: 15em; */
+}
+.column {
+  float: left;
+  width: 32%;
+  margin: 9px;
+  background-color: #93E9BE;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* ADMIN */
 
 .row-highlight-r {
     background-color: rgba(249, 169, 95, 0.849) !important;
