@@ -213,14 +213,36 @@
 <script>
 // make barData
 var barData = {
-    labels: ["South Korea", "Hong Kong", "Switzerland", "Japan", "Netherlands"],
-    datasets: [{
-        borderColor: window.chartColors.blue,
-        borderWidth: 1,
-        data: [
-            24.6, 15.7, 14.9, 14.9, 14, 3
-        ]
-    }]
+    labels: ["Jumlah Positif", "Jumlah Sembuh", "Jumlah Meninggal"],
+    datasets: [
+        {
+            label: "Jumlah Positif",
+            backgroundColor: window.chartColors.red,
+            borderWidth: 1,
+            fill: true,
+            data: [
+                {{$sumData->pos}}
+            ]
+        },
+        {
+            label: "Jumlah Sembuh",
+            backgroundColor: window.chartColors.green,
+            borderWidth: 1,
+            fill: true,
+            data: [
+                {{$sumData->sem}}
+            ]
+        },
+        {
+            label: "Jumlah Meninggal",
+            backgroundColor: window.chartColors.grey,
+            borderWidth: 1,
+            fill: true,
+            data: [
+                {{$sumData->men}}
+            ]
+        },
+    ]
 }
 // make myChart
 myChart = {
@@ -235,7 +257,7 @@ myChart = {
         responsive: true,
         title: {
             display: true,
-            text: 'Chart.js Horizontal Bar Chart'
+            text: 'Chart Jumlah Pasien'
         }
     }
 }
