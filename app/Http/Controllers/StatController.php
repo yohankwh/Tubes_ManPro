@@ -27,7 +27,19 @@ class StatController extends Controller
     }
 
     public function statistik(){
-        return view('grafstat.statistik');
+        $sum_st = DB::table("search_trend")
+	    ->select(DB::raw("SUM(cold) as cold"),DB::raw("SUM(flu) as flu"),DB::raw("SUM(pneumonia) as pneum"),DB::raw("SUM(coronavirus) as covid"))
+        ->get();
+
+        $st_recent = search_trend::orderBy('cold', 'desc')
+                                    ->select('cold','flu','pneumonia','coronavirus')
+                                    ->first();
+        
+        $data_statistik = [
+            'sumData_st' => $sum_st[0],
+            'st' => $st_recent
+        ];
+        return view('grafstat.statistik')->with($data_statistik);
     }
 
     public function sebaranKasus(){
