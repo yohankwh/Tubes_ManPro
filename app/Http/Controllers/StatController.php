@@ -60,9 +60,36 @@ class StatController extends Controller
         ->where('age', '=', '90s')->count();
         $c100sAge = DB::table("kasus_per_bulan")
         ->where('age', '=', '100s')->count();
+
+        $cJan = DB::table("kasus_per_bulan")
+        ->whereMonth('confirmed_date', '01')->count();
+        $cFeb = DB::table("kasus_per_bulan")
+        ->whereMonth('confirmed_date', '02')->count();
+        $cMar = DB::table("kasus_per_bulan")
+        ->whereMonth('confirmed_date', '03')->count();
+        $cApr = DB::table("kasus_per_bulan")
+        ->whereMonth('confirmed_date', '04')->count();
+        $cMay = DB::table("kasus_per_bulan")
+        ->whereMonth('confirmed_date', '05')->count();
+        $cJun = DB::table("kasus_per_bulan")
+        ->whereMonth('confirmed_date', '06')->count();
+        $cJul = DB::table("kasus_per_bulan")
+        ->whereMonth('confirmed_date', '07')->count();
+        $cAug = DB::table("kasus_per_bulan")
+        ->whereMonth('confirmed_date', '08')->count();
+        $cSep = DB::table("kasus_per_bulan")
+        ->whereMonth('confirmed_date', '09')->count();
+        $cOct = DB::table("kasus_per_bulan")
+        ->whereMonth('confirmed_date', '10')->count();
+        $cNov = DB::table("kasus_per_bulan")
+        ->whereMonth('confirmed_date', '11')->count();
+        $cDec = DB::table("kasus_per_bulan")
+        ->whereMonth('confirmed_date', '12')->count();
+
         $data_statistik = [
             'sumData_st' => $sum_st[0],
             'st' => $st_recent,
+
             'cAgeNull' => $cNullAge,
             'cAge0s' => $c0sAge,
             'cAge10s' => $c10sAge,
@@ -75,6 +102,19 @@ class StatController extends Controller
             'cAge80s' => $c80sAge,
             'cAge90s' => $c90sAge,
             'cAge100s' => $c100sAge,
+
+            'cJan' => $cJan,
+            'cFeb' => $cFeb,
+            'cMar' => $cMar,
+            'cApr' => $cApr,
+            'cMay' => $cMay,
+            'cJune' => $cJun,
+            'cJuly' => $cJul,
+            'cAug' => $cAug,
+            'cSep' => $cSep,
+            'cOct' => $cOct,
+            'cNov' => $cNov,
+            'cDec' => $cDec,
         ];
         return view('grafstat.statistik')->with($data_statistik);
     }
