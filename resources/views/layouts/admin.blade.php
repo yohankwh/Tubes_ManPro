@@ -16,12 +16,13 @@
 
   <!-- Custom fonts for this template-->
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
+  <link rel="stylesheet" type="text/css" href="{{asset('css/util.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}">
   <!-- Custom styles for this template-->
   @yield('custom')
   
 </head>
-<body class="">
+<body class="" style="overflow-x:hidden">
     <nav class="navbar navbar-expand-lg navbar-light bg-dark mb-3 py-2 text-white">
         <div class="container mx-0">
             <a class="navbar-brand text-white" href="{{ route('admin.index') }}">
@@ -31,6 +32,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
+            @if(Auth::user())
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
@@ -45,6 +47,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
+                    
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             Hello, {{explode(' ',Auth::user()->name)[0]}}<span class="caret"></span>
@@ -64,12 +67,13 @@
                     </li>
                 </ul>
             </div>
+            @endif
         </div>
     </nav>
     <div class="">
         @yield('content')
     </div>
-    <div class="py-2 pr-3 container-fluid my-auto text-right">
+    <div class="py-2 text-right fixed-bottom">
         <div class="copyright">
             <span>© 2020 Pusat Informasi COVID-19</span>
         </div>

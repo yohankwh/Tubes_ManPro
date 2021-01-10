@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- Page Heading -->
-<div class="container">
+<div class="container my-5">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 mt-3 text-gray-800"><b>Ubah Isi Berita</b></h1>
     </div>
@@ -12,6 +12,7 @@
     <div class="">
         <form action="{{route('berita.update',$berita->id)}}" method="POST" id="b-form" enctype="multipart/form-data">
         {{ csrf_field() }}
+        <input name="_method" type="hidden" value="PUT">
             <div class="form-group">
                 <label for="title">Judul</label>
                 <input class="form-control" placeholder="Judul Berita" name="title" value="{{$berita->title}}">
