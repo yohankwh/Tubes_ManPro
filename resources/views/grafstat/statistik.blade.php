@@ -56,6 +56,47 @@
       </div>
     </div>
   </div>
+  `
+  <div class="rounded border px-1 py-2 text-left bg-white">
+    <h5 class="ml-2"><b>Demografi Kasus Per Bulan</b></h5>
+    <hr class="my-2">
+    <div class="w3-container p-2 pt-3 bg-white mb-5" width="100%">
+      <div class="row mx-0">
+        <div class="col-7">
+          <canvas id="kpbChart"></canvas>
+        </div>
+        <div class="col-5 pl-0">
+          <table id="demoKbp" class="table">
+            <thead>
+              <tr>
+                <th>Januari</th>
+                <th>Februari</th>
+                <th>Maret</th>
+                <th>April</th>
+                <th>Mei</th>
+                <th>Juni</th>
+              </tr>
+            </thead>
+            <!-- kurang paham untuk bagian tbody ini
+            <tbody>
+              @foreach($demo_data as $demo)
+              <tr>
+                <td>{{$demo->kel_umur}}</td>
+                <td data-order="{{$demo->pos}}">
+                  <div class="row">
+                    <div class="col-2">{{number_format($demo->pos,0,',','.')}}</div>
+                    <div class="progress-bar rounded" role="progressbar" style="width: {{round($demo->pos/$demo_sum_pos*100,2)}}%"></div>
+                  </div>
+                </td>
+                <td>{{$latest_demo[$loop->index]->positif}}</td>
+              </tr>
+              @endforeach
+            </tbody>-->
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 @endsection
 
@@ -63,6 +104,7 @@
 <script>
   var data = {!! json_encode($demo_data) !!}
   var ctxDemo = document.getElementById('demoChart').getContext('2d');
+  var ctxKpb = document.getElementById('kpbChart').getContext('2d');
   var psf = new Array();
   var mgl = new Array();
   var kel = new Array();
@@ -100,6 +142,67 @@
           }
       }
   });
+  var lineDemo = new Chart(ctxKpb, {
+            type: 'line',
+            data: {
+                datasets : [
+                    {
+                        label: "Januar",
+                        borderColor: window.chartColors.red,
+                        data: {{$cJan}},
+                    },
+                    {
+                        label: "Februar",
+                        borderColor: window.chartColors.green,
+                        data: {{$cFeb}},
+                    },
+                    {
+                        label: "Maret",
+                        borderColor: window.chartColors.orange,
+                        data: {{$cMar}},
+                    },
+                    {
+                        label: "April",
+                        borderColor: window.chartColors.blue,
+                        data: {{$cApr}},
+                    },
+                    {
+                        label: "Mei",
+                        borderColor: window.chartColors.purple,
+                        data: {{$cMay}},
+                    },
+                    {
+                        label: "Juni",
+                        borderColor: window.chartColors.brown,
+                        data: {{$cJune}},
+                    }
+                ],
+                labels: ["Januari","Februari", "Maret", "April", "Mei", "Juni"]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Month'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Jumlah Positif Covid-19'
+                        }
+                    }]
+                },
+                title: {
+                    display: true,
+                    text: 'Line Chart Data Kasus Positif'
+                },
+                responsive: true
+            }
+        });
   $(document).ready( function () {
     $('#demoTable').DataTable( {
         "paging":   false,
