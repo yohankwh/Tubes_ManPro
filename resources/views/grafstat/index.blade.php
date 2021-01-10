@@ -31,20 +31,20 @@
             <div class="col-3 rounded border p-3 mx-3 bg-salmon text-white">
                 <small>Jumlah Pasien</small>
                 <p class="mb-0"><b>Positif</b></p>
-                <h1 class="mb-0"><b>{{$sumData->pos}}</b></h1>
-                <div>{{$kasus->positif}}</div>
+                <h1 class="mb-0"><b>{{number_format($sumData->pos,0,',','.')}}</b></h1>
+                <div><b>&plus; {{$kasus->positif}}</b></div>
             </div>
             <div class="col-3 rounded border p-3 mx-3 bg-seafoam text-white">
                 <small>Jumlah Pasien</small>
                 <p class="mb-0"><b>Sembuh</b></p>
-                <h1 class="mb-0"><b>{{$sumData->sem}}</b></h1>
-                <div>{{$kasus->sembuh}}</div>
+                <h1 class="mb-0"><b>{{number_format($sumData->sem,0,',','.')}}</b></h1>
+                <div><b>&plus; {{$kasus->sembuh}}</b></div>
             </div>
             <div class="col-3 rounded border p-3 mx-3 bg-dark text-white">
                 <small>Jumlah Pasien</small>
                 <p class="mb-0"><b>Meninggal</b></p>
-                <h1 class="mb-0"><b>{{$sumData->men}}</b></h1>
-                <div>{{$kasus->meninggal}}</div>
+                <h1 class="mb-0"><b>{{number_format($sumData->men,0,',','.')}}</b></h1>
+                <div><b>&plus; {{$kasus->meninggal}}</b></div>
             </div>
         </div>
     </div>
