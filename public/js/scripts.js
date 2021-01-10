@@ -86,7 +86,6 @@ function loadCircleRegion(regionName, data, radiusVal){
   }).addTo(mymap);
 }
 
-
 function getColor(val){
   if(val<=50){
     return "#ffc764";

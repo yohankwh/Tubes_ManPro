@@ -25,7 +25,7 @@ crossorigin=""></script>
 @endsection
 
 @section('content')
-<div class="p-2">
+<div class="p-2 my-3">
   <div class="container">
       <div class="row justify-content-around">
           <div class="col-sm-7 bg-white w3-round-xlarge pb-3 mb-5">
@@ -53,7 +53,7 @@ crossorigin=""></script>
         <div class="row justify-content-around">
           <div class="col-sm-12 bg-white w3-round-xlarge mb-5" style="height:586px;">
             <div class="py-2">
-              <h4>Jumlah Kasus Kumulatif</h4>
+              <h5><b>Jumlah Kasus Daerah</b></h5>
               <div class="p-2">
                 <table id="daerah_k">
                   <thead>

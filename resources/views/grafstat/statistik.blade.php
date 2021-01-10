@@ -20,7 +20,7 @@
   <div class="w3-container border shadow-sm rounded p-3 bg-white mb-5 p-1" width="100%">
     <canvas id="canvasUmum" width="400" height="100"></canvas>
   </div>
-  <div class="rounded border px-1 py-2 text-left bg-white">
+  <div class="rounded border px-1 py-2 text-left bg-white mb-5">
     <h5 class="ml-2"><b>Demografi Umur</b></h5>
     <hr class="my-2">
     <div class="w3-container p-2 pt-3 bg-white mb-5" width="100%">
@@ -53,6 +53,20 @@
             </tbody>
           </table>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="rounded border px-1 py-2 text-left bg-white">
+    <div class="d-flex justify-content-between px-3 pt-2">
+      <h5><b>Kasus Positif Daerah</b></h5>
+      <select id="sel-obj" class="custom-select w-25" onchange="refreshDaerahChart()">
+        <option value="Seoul" selected>Seoul</option>
+      </select>
+    </div>
+    <hr class="my-2">
+    <div class="w3-container p-2 pt-3 bg-white mb-5" width="100%">
+      <div class="row mx-0">
+        <canvas id="canvasDaerah" width="400" height="100"></canvas>
       </div>
     </div>
   </div>
@@ -102,18 +116,43 @@
 
 @section('scripts')
 <script>
+  var ctxDemo = document.getElementById('demoChart').getContext('2d');
+  var ctxUmum = document.getElementById('canvasUmum').getContext('2d');
+  var ctxDaerah = document.getElementById('canvasDaerah').getContext('2d');
   var data = {!! json_encode($demo_data) !!}
   var ctxDemo = document.getElementById('demoChart').getContext('2d');
   var ctxKpb = document.getElementById('kpbChart').getContext('2d');
+  var kasus = {!! json_encode($kasus_umum) !!}
+  var kasusDaerah = {!! json_encode($kasus_daerah) !!}
+
+  var selObj = document.getElementById('sel-obj');
+  let i = 0;
+  Object.keys(kasusDaerah).forEach(function(item){
+    if(i==0){i++;}//skip Seoul
+    else{
+      let opt = document.createElement('option');
+      opt.appendChild(document.createTextNode(item));
+      opt.value = item;
+      selObj.appendChild(opt);
+    }
+  })
+
+  function refreshDaerahChart(){
+    window.chartDaerah.data=getNewDataDaerah(selObj.value);
+    window.chartDaerah.update();
+  }
+</script>
+<script>
   var psf = new Array();
+  var psf_sum = 0;
   var mgl = new Array();
   var kel = new Array();
   data.forEach(function(item){
     psf.push(item.pos);
     mgl.push(item.men);
     kel.push(item.kel_umur);
+    psf_sum+= parseInt(item.pos);
   });
-  console.log(kel);
   var pieDemo = new Chart(ctxDemo, {
       type: 'pie',
       data: {
@@ -137,11 +176,16 @@
           ],
       },
       options: {
-          pieceLabel: {
-            render: 'value' //show values
-          }
+        plugins: {
+            datalabels: {
+                formatter: function(value, context) {
+                    return (value/psf_sum*100).toFixed(2)+"%";
+                }
+            }
+        }
       }
   });
+  
   var lineDemo = new Chart(ctxKpb, {
             type: 'line',
             data: {
@@ -221,8 +265,6 @@
 
 <script>
   var timeFormat = 'YYYY-MM-DD';
-  var kasus = {!! json_encode($kasus_umum) !!}
-  var ctxUmum = document.getElementById('canvasUmum').getContext('2d');
   var psfUmum = new Array();
   var semUmum = new Array();
   var mglUmum = new Array();
@@ -281,6 +323,70 @@
         }
       }
   };
-  window.myLine = new Chart(ctxUmum, configUmum);
+  window.chartUmum = new Chart(ctxUmum, configUmum);
+</script>
+
+<script>
+  var keyIndex = "Seoul";
+  var titleDaerah = "Kasus COVID-19 Seoul"
+  var timeFormat = 'YYYY-MM-DD';
+  console.log(kasusDaerah["Seoul"]);
+  var dataDaerah = getNewDataDaerah("Seoul");
+
+  var configDaerah = {
+      type: 'bar',
+      data: dataDaerah,
+      options: {
+        title: {
+            text: titleDaerah,
+            display: true,
+            fontSize: 16
+        },
+        scales: {
+            xAxes: [{
+                type: 'time',
+                time: {
+                    parser: timeFormat,
+                    round: 'day',
+                    tooltipFormat: 'll'
+                },
+            }],
+        },
+        plugins: {
+            datalabels: {
+              display: false
+            }
+        }
+      }
+  };
+
+  function getNewDataDaerah(daerah){
+    var dataDaerah = {
+                      labels: kasusDaerah[daerah].tanggal,
+                      datasets: [{
+                          label: 'Positif',
+                          backgroundColor: color(window.chartColors.orange).alpha(0.5).rgbString(),
+                          borderColor: window.chartColors.orange,
+                          fill: false,
+                          data: kasusDaerah[daerah].positif,
+                      },
+                      {
+                          label: 'Sembuh',
+                          backgroundColor: color(window.chartColors.green).alpha(0.5).rgbString(),
+                          borderColor: window.chartColors.green,
+                          fill: false,
+                          data: kasusDaerah[daerah].sembuh,
+                      },
+                      {
+                          label: 'Meninggal',
+                          backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+                          borderColor: window.chartColors.red,
+                          fill: false,
+                          data: kasusDaerah[daerah].meninggal,
+                      }]
+                    };
+    return dataDaerah;
+  }
+  window.chartDaerah = new Chart(ctxDaerah, configDaerah);
 </script>
 @endsection
