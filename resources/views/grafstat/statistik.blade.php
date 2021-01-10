@@ -147,12 +147,12 @@
             data: {
                 datasets : [
                     {
-                        label: "Januar",
+                        label: "Januari",
                         borderColor: window.chartColors.red,
                         data: {{$cJan}},
                     },
                     {
-                        label: "Februar",
+                        label: "Februari",
                         borderColor: window.chartColors.green,
                         data: {{$cFeb}},
                     },
