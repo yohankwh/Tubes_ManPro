@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\KasusUmum;
 use App\search_trend;
+use App\Demografi;
+use App\KasusDaerah;
 
 class StatController extends Controller
 {
@@ -120,6 +122,18 @@ class StatController extends Controller
     }
 
     public function sebaranKasus(){
-        return view('grafstat.sebaran');
+        $sum_daerah = DB::table('kasus_daerah')
+                        ->select('daerah',DB::raw("SUM(positif) as pos"))
+                        ->groupBy('daerah')
+                        ->get();
+
+        $all_daerah = KasusDaerah::orderBy('tanggal', 'desc')
+                                ->select('daerah','positif','meninggal','sembuh')
+                                ->get();
+        $data = [
+          'sum_daerah'  => $sum_daerah,
+          'all_data' => $all_daerah
+        ];
+        return view('grafstat.sebaran')->with($data);
     }
 }
