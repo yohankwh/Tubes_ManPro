@@ -118,7 +118,26 @@ class StatController extends Controller
             'cNov' => $cNov,
             'cDec' => $cDec,
         ];
-        return view('grafstat.statistik')->with($data_statistik);
+        // return view('grafstat.statistik')->with($data_statistik);
+
+        $demo_data = DB::table('demografi')
+                        ->select('kel_umur',DB::raw("SUM(positif) as pos"),DB::raw("SUM(meninggal) as men"))
+                        ->groupBy('kel_umur')
+                        ->get();
+                        
+        $sum_demo = DB::table('demografi')
+                        ->select(DB::raw("SUM(positif) as pos"))
+                        ->get();
+
+        $latest_date = Demografi::max('tanggal');
+        $latest_demo = Demografi::where('tanggal',$latest_date)->select('kel_umur','positif','meninggal')->get();
+        $data = [
+            'demo_data' => $demo_data,
+            'latest_demo' => $latest_demo,
+            'demo_sum_pos' => json_decode($sum_demo)[0]->pos
+        ];
+
+        return view('grafstat.statistik')->with($data);
     }
 
     public function sebaranKasus(){
