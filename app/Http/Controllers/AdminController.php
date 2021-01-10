@@ -26,21 +26,6 @@ class AdminController extends Controller
         $demografi = Demografi::orderBy('tanggal', 'desc')->get();
         $list_daerah = KasusDaerah::orderBy('tanggal', 'desc')->get();
 
-        // foreach($kasus_umum as $kasus){
-        //     $kasus->tglnum = strtotime($kasus->tanggal);
-        //     $kasus->tanggal = date('Y-m-d',$kasus->tglnum);
-        // }
-
-        // foreach($demografi as $demo){
-        //     $demo->tglnum = strtotime($demo->tanggal);
-        //     $demo->tanggal = date('Y-m-d',$demo->tglnum);
-        // }
-
-        // foreach($list_daerah as $daerah){
-        //     $daerah->tglnum = strtotime($daerah->tanggal);
-        //     $daerah->tanggal = date('Y-m-d',$daerah->tglnum);
-        // }
-
         $data = [
             'all_berita' => $all_berita,
             'kasusUmum' => $kasus_umum,
@@ -137,7 +122,14 @@ class AdminController extends Controller
         $berita = new Berita();
         $berita->title = $request->input('title');
         $berita->content = $request->input('content');
-        $berita->header_image = "test.jpg";
+
+        if($request->hasfile('header_photo')){
+            $name=Auth::user()->id."_".time().rand(1,10).'.jpg';
+            $file = $request->file('header_photo');
+            $file->move(base_path('public/img/berita'), $name);
+            
+            $berita->header_image = $name;
+        }
         $berita->save();
 
         return redirect()->route('admin.berita');
@@ -173,7 +165,15 @@ class AdminController extends Controller
         if ($berita) {
             $berita->title = $request->input('title');
             $berita->content = $request->input('content');
-            $berita->header_image = "test.jpg";
+
+            if($request->hasfile('header_photo')){
+                $name=Auth::user()->id."_".time().rand(1,10).'.jpg';
+                $file = $request->file('header_photo');
+                $file->move(base_path('public/img/berita'), $name);
+                
+                $berita->header_image = $name;
+            }
+
             $berita->save();
 
             return redirect()->route('berita.view', $berita->id);

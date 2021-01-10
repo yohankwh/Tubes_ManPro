@@ -15,7 +15,7 @@
         <span>{{date('l, d M Y H.i', strtotime($berita->created_at))}}</span>
     </div>
     <div class="hdr-img my-3 rounded">
-        <img style="width:480px;object-fit:cover;object-position:center;" src="{{asset('img/'.$berita->header_image)}}">
+        <img style="width:480px;object-fit:cover;object-position:center;" src="{{asset('img/berita/'.$berita->header_image)}}">
     </div>
     <p style="white-space: pre-line" class="my-5">{{$berita->content}}</p>
     <div class="my-3">

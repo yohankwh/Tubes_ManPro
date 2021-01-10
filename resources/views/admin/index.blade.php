@@ -134,23 +134,23 @@
   <script>
   $(document).ready( function () {
     $('#table_umum').DataTable({
-                        "order": [[ 0, "desc" ]],
-                        "lengthChange": false,
-                        pageLength: 3,
-                        searching: false
-                     });
+      "order": [[ 0, "desc" ]],
+      "lengthChange": false,
+      pageLength: 3,
+      searching: false
+    });
     $('#table_daerah').DataTable({
       "order": [[ 0, "desc" ]],
       "scrollX":true,
       info: false,
-      paging: false,
+      pageLength: 5
     });
     $('#table_demo').DataTable({
-                        "order": [[ 0, "desc" ]],
-                        "lengthChange": false,
-                        pageLength: 5,
-                        searching: false
-                     });
+      "order": [[ 0, "desc" ]],
+      "lengthChange": false,
+      pageLength: 5,
+      searching: false
+    });
   });
   </script>
   @endsection
