@@ -24,7 +24,7 @@
 @section('content')
 <!-- 3 Columns: Active, Deaths, Recovered  -->
 <div class="w3-round border my-3 p-2 shadow-sm bg-white">
-    <h6 class="text-left mt-2 mb-3">Data terkini: {{date("d F Y")}}</h6>
+    <h6 class="text-left mt-2 mb-3">Data terkini: {{date("d F Y",strtotime($kasus->tanggal))}}</h6>
     <hr class="mt-0">
     <div class="w3-container pt-2 pb-2">
         <div class="row text-left">
@@ -52,8 +52,8 @@
     <div><a href="{{route('statistik')}}">Lihat Selengkapnya &rsaquo;</a></div>
 </div>
 <!-- Graph -->
-<div class="w3-container border shadow-sm rounded p-3 bg-white mb-5" width="100%">
-<canvas id="canvas" width="400" height="100"></canvas>
+<div class="w3-container border shadow-sm rounded p-3 bg-white mb-5 p-1" width="100%">
+    <canvas id="canvas" width="400" height="100"></canvas>
 </div>
 
 <div>
@@ -193,7 +193,31 @@
             </tr>
         </tbody>
     </table>
-</div><br><br>
+</div>
+
+<div class="py-3">
+    <h2>Berita</h2>
+    <div class="text-left p-2 w-50" style="margin:0 auto">
+    @foreach($all_berita as $berita)
+        <div class="rounded border shadow-sm py-2 px-2 my-3 bg-white" style="height:186px;margin:0 auto">
+            <div class="row justify-content-between">
+                <div class="col-8">
+                    <a href="{{route('index')}}">
+                        <h5 class="mb-2"><b>{{$berita->title}}</b></h5>
+                    </a>
+                    <small>{{date("l, d M Y",strtotime($berita->created_at))}}</small>
+                    <p class="mt-2">{{Illuminate\Support\Str::limit($berita->content,80)}}</p>
+                </div>
+                <div class="col-4">
+                    <div class="rounded" style="height:168px;overflow:hidden">
+                        <img class="rounded" height="168px" style="object-fit:cover" src="{{asset('/img/berita/'.$berita->header_image)}}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+    </div>
+</div>
 <script>
     var myIndex = 0;
     carousel();
@@ -209,66 +233,64 @@
       x[myIndex-1].style.display = "block";  
       setTimeout(carousel, 6000);    
     }
-    </script>
+</script>
 <script>
-// make barData
-var barData = {
-    labels: ["Jumlah Positif", "Jumlah Sembuh", "Jumlah Meninggal"],
-    datasets: [
-        {
-            label: "Jumlah Positif",
-            backgroundColor: window.chartColors.red,
-            borderWidth: 1,
-            fill: true,
-            data: [
-                {{$sumData->pos}}
-            ]
-        },
-        {
-            label: "Jumlah Sembuh",
-            backgroundColor: window.chartColors.green,
-            borderWidth: 1,
-            fill: true,
-            data: [
-                {{$sumData->sem}}
-            ]
-        },
-        {
-            label: "Jumlah Meninggal",
-            backgroundColor: window.chartColors.grey,
-            borderWidth: 1,
-            fill: true,
-            data: [
-                {{$sumData->men}}
-            ]
-        },
-    ]
-}
-// make myChart
-myChart = {
-    type: 'horizontalBar',
-    data: barData,
-    options: {
-        elements: {
-            rectangle: {
-                borderWidth: 2,
-            }
-        },
-        responsive: true,
-        title: {
-            display: true,
-            text: 'Chart Jumlah Pasien'
-        }
+    var timeFormat = 'YYYY-MM-DD';
+    var posData = {!!json_encode($pos_data)!!}
+    var dates = new Array();
+    var cases = new Array();
+    posData.forEach(function(item){
+        dates.push(item.tanggal);
+        cases.push(item.positif);
+    });
+
+    function newDate(days) {
+        return moment().add(days, 'd').toDate();
     }
-}
 
-window.onload = function() {
-    var ctx = document.getElementById("canvas").getContext("2d");
-    new Chart(ctx, myChart);
-};
+    function newDateString(days) {
+        return moment().add(days, 'd').format(timeFormat);
+    }
 
-$(document).ready( function () {
-    $('#call-table').DataTable({pageLength: 5});
-});
+    var color = Chart.helpers.color;
+    var config = {
+        type: 'bar',
+        data: {
+            labels: dates,
+            datasets: [{
+                label: 'Dataset',
+                backgroundColor: color(window.chartColors.orange).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.orange,
+                fill: false,
+                data: cases,
+            }]
+        },
+        options: {
+            title: {
+                text: 'Perkembangan Jumlah Kasus Positif COVID-19 Korea Selatan',
+                display: true,
+                fontSize: 16
+            },
+            scales: {
+                xAxes: [{
+                    type: 'time',
+                    time: {
+                        parser: timeFormat,
+                        round: 'day',
+                        tooltipFormat: 'll'
+                    },
+                }],
+            },
+            legend: {
+                display: false
+            }
+        }
+    };
+
+    $(document).ready( function () {
+        $('#call-table').DataTable({pageLength: 5});
+        var ctx = document.getElementById('canvas').getContext('2d');
+        window.myLine = new Chart(ctx, config);
+    });
 </script>
 @endsection

@@ -9,6 +9,7 @@ use App\KasusUmum;
 use App\search_trend;
 use App\Demografi;
 use App\KasusDaerah;
+use App\Berita;
 
 class StatController extends Controller
 {
@@ -16,20 +17,32 @@ class StatController extends Controller
         $sum = DB::table("kasus_umum")
 	    ->select(DB::raw("SUM(positif) as pos"),DB::raw("SUM(sembuh) as sem"),DB::raw("SUM(meninggal) as men"))
         ->get();
+        
+        $pos_data = KasusUmum::select("tanggal","positif")->get();
+
+        $all_berita = Berita::orderBy('created_at','desc')->take(3)->get();
 
         $kasus_recent = KasusUmum::orderBy('tanggal', 'desc')
-                                    ->select('positif','meninggal','sembuh')
+                                    ->select('tanggal','positif','meninggal','sembuh')
                                     ->first();
         
         $data = [
             'sumData' => $sum[0],
-            'kasus' => $kasus_recent
+            'kasus' => $kasus_recent,
+            'all_berita' => $all_berita,
+            'pos_data' => $pos_data
         ];
 
         return view('grafstat.index')->with($data);
     }
 
     public function statistik(){
+        $kasus_umum = KasusUmum::orderBy('tanggal','desc')->select("tanggal","positif","sembuh","meninggal")->get();
+
+        $sum_umum = DB::table("kasus_umum")
+	    ->select(DB::raw("SUM(positif) as pos"),DB::raw("SUM(sembuh) as sem"),DB::raw("SUM(meninggal) as men"))
+        ->get()[0];
+
         $sum_st = DB::table("search_trends")
 	    ->select(DB::raw("SUM(cold) as cold"),DB::raw("SUM(flu) as flu"),DB::raw("SUM(pneumonia) as pneum"),DB::raw("SUM(coronavirus) as covid"))
         ->get();
@@ -134,7 +147,9 @@ class StatController extends Controller
         $data = [
             'demo_data' => $demo_data,
             'latest_demo' => $latest_demo,
-            'demo_sum_pos' => json_decode($sum_demo)[0]->pos
+            'demo_sum_pos' => json_decode($sum_demo)[0]->pos,
+            'sum_umum' => $sum_umum,
+            'kasus_umum' => $kasus_umum
         ];
 
         return view('grafstat.statistik')->with($data);
@@ -142,7 +157,7 @@ class StatController extends Controller
 
     public function sebaranKasus(){
         $sum_daerah = DB::table('kasus_daerah')
-                        ->select('daerah',DB::raw("SUM(positif) as pos"))
+                        ->select('daerah',DB::raw("SUM(positif) as pos"),DB::raw("SUM(sembuh) as sem"),DB::raw("SUM(meninggal) as men"))
                         ->groupBy('daerah')
                         ->get();
 

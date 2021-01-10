@@ -32,7 +32,7 @@
 <body>
 
 <!-- Navbar -->
-<div class="w3-top w3-margin-bottom bg-light" id="nav-contact">
+<div class="w3-top w3-margin-bottom bg-light" id="nav-contact" style="z-index:1001">
   <div class="container w-100 py-3 mini-nav d-flex justify-content-between" >
     <div>
       <span class=" mb-0 mr-3">Layanan Darurat COVID-19</span>
@@ -90,17 +90,6 @@
  <p class="mb-0">© 2020 Pusat Informasi COVID-19</p>
 </footer>
 
-<!-- <script>
-// Used to toggle the menu on small screens when clicking on the menu button
-function myFunction() {
-  var x = document.getElementById("navDemo");
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-  } else { 
-    x.className = x.className.replace(" w3-show", "");
-  }
-}
-</script> -->
 <script>
   var prevScrollpos = window.pageYOffset;
   window.onscroll = function() {
@@ -115,4 +104,6 @@ function myFunction() {
 </script>
 
 </body>
+<script src="{{asset('js/scripts.js')}}"></script>
+@yield('scripts')
 </html>

@@ -16,6 +16,9 @@ Route::get('/', 'StatController@index')->name('index');
 Route::get('/statistik', 'StatController@statistik')->name('statistik');
 Route::get('/sebaran-kasus', 'StatController@sebaranKasus')->name('sebaran');
 
+//AJAX ROUTES
+Route::get('/index/data','StatController@getIndexChartData')->name('index.chart');
+
 //INFO ROUTES
 
 //ADMIN ROUTES

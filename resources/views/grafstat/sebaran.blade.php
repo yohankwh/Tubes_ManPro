@@ -11,6 +11,8 @@ crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
 integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
 crossorigin=""></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
 @endsection
 
 @section('header')
@@ -47,6 +49,37 @@ crossorigin=""></script>
             </div>
           </div>
       </div>
+      <div class="container">
+        <div class="row justify-content-around">
+          <div class="col-sm-12 bg-white w3-round-xlarge mb-5" style="height:586px;">
+            <div class="py-2">
+              <h4>Jumlah Kasus Kumulatif</h4>
+              <div class="p-2">
+                <table id="daerah_k">
+                  <thead>
+                    <tr>
+                      <th>Daerah</th>
+                      <th>Positif</th>
+                      <th>Sembuh</th>
+                      <th>Meninggal</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach($sum_daerah as $daerah)
+                    <tr>
+                      <td>{{$daerah->daerah}}</td>
+                      <td>{{$daerah->pos}}</td>
+                      <td>{{$daerah->sem}}</td>
+                      <td>{{$daerah->men}}</td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
 </div>
 @endsection
@@ -66,19 +99,14 @@ crossorigin=""></script>
     psf.push(item.pos);
     mgl.push(item.men);
     sem.push(item.sem);
+    console.log(item.men)
     avgPos += parseInt(item.pos);
   });
   
-  console.log("sum pos is"+avgPos);
   avgPos/=psf.length;
-  console.log("psf length is"+psf.length);
-  console.log("avg is"+avgPos);
 
   daerah.forEach(function(item, index){
     loadCircleRegion(item, psf[index], psf[index]/avgPos);
-    console.log(item);
-    console.log(psf[index]);
-    console.log(psf[index]/avgPos);
   });
 
   var ctx = document.getElementById('canvasDaerah').getContext('2d');
@@ -109,5 +137,17 @@ crossorigin=""></script>
         }
       }
   });
+
+  var tKasusUmum = $('#daerah_k').DataTable({
+      "order": [[ 1, "desc" ]],
+      "lengthChange": false,
+      "columns": [
+          { "width": "40%" },
+          { "width": "20%" },
+          { "width": "20%" },
+          { "width": "20%" },
+        ],
+    });
+  
 </script>
 @endsection

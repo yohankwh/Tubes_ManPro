@@ -3,7 +3,7 @@
 @section('custom')
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
 @endsection
 
 @section('header')
@@ -16,14 +16,14 @@
 @endsection
 
 @section('content')
-<div class="p-2">
-  <div class="rounded border px-1 py-2">
-
+<div class="p-2 my-2">
+  <div class="w3-container border shadow-sm rounded p-3 bg-white mb-5 p-1" width="100%">
+    <canvas id="canvasUmum" width="400" height="100"></canvas>
   </div>
   <div class="rounded border px-1 py-2 text-left bg-white">
     <h5 class="ml-2"><b>Demografi Umur</b></h5>
     <hr class="my-2">
-    <div class="w3-container rounded p-2 pt-3 bg-white mb-5" width="100%">
+    <div class="w3-container p-2 pt-3 bg-white mb-5" width="100%">
       <div class="row mx-0">
         <div class="col-7">
           <canvas id="demoChart"></canvas>
@@ -62,7 +62,7 @@
 @section('scripts')
 <script>
   var data = {!! json_encode($demo_data) !!}
-  var ctx = document.getElementById('demoChart').getContext('2d');
+  var ctxDemo = document.getElementById('demoChart').getContext('2d');
   var psf = new Array();
   var mgl = new Array();
   var kel = new Array();
@@ -72,7 +72,7 @@
     kel.push(item.kel_umur);
   });
   console.log(kel);
-  var pieDemo = new Chart(ctx, {
+  var pieDemo = new Chart(ctxDemo, {
       type: 'pie',
       data: {
           labels: kel,
@@ -112,6 +112,72 @@
         ],
         "order": [[ 1, "desc" ]]
     });
+    
   });
+</script>
+
+<script>
+  var timeFormat = 'YYYY-MM-DD';
+  var kasus = {!! json_encode($kasus_umum) !!}
+  var ctxUmum = document.getElementById('canvasUmum').getContext('2d');
+  var psfUmum = new Array();
+  var semUmum = new Array();
+  var mglUmum = new Array();
+  var tglUmum = new Array();
+  kasus.forEach(function(item){
+    psfUmum.push(item.positif);
+    mglUmum.push(item.meninggal);
+    semUmum.push(item.sembuh);
+    tglUmum.push(item.tanggal);
+  });
+  var color = Chart.helpers.color;
+  var configUmum = {
+      type: 'bar',
+      data: {
+          labels: tglUmum,
+          datasets: [{
+              label: 'Positif',
+              backgroundColor: color(window.chartColors.orange).alpha(0.5).rgbString(),
+              borderColor: window.chartColors.orange,
+              fill: false,
+              data: psfUmum,
+          },{
+              label: 'Sembuh',
+              backgroundColor: color(window.chartColors.green).alpha(0.5).rgbString(),
+              borderColor: window.chartColors.green,
+              fill: false,
+              data: semUmum,
+          },{
+              label: 'Meninggal',
+              backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+              borderColor: window.chartColors.red,
+              fill: false,
+              data: mglUmum,
+          }]
+      },
+      options: {
+        title: {
+            text: 'Kasus COVID-19 Korea Selatan',
+            display: true,
+            fontSize: 16
+        },
+        scales: {
+            xAxes: [{
+                type: 'time',
+                time: {
+                    parser: timeFormat,
+                    round: 'day',
+                    tooltipFormat: 'll'
+                },
+            }],
+        },
+        plugins: {
+            datalabels: {
+              display: false
+            }
+        }
+      }
+  };
+  window.myLine = new Chart(ctxUmum, configUmum);
 </script>
 @endsection
