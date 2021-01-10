@@ -11,7 +11,6 @@
 .bg-seafoam{
   background-color: rgb(68, 173, 138) !important;
 }
-
 *{
   font-family: "Montserrat", sans-serif;
 }
@@ -115,6 +114,23 @@ body, h1, h2, h3, h4, h5, h6, .mini-nav, .text-lato{
 .rcard-cap{
   font-size: 1.18em;
 }
+.mini-box{
+  display: block;
+  height:15px;
+  width:15px;
+}
+.mini-lv1{
+  background-color:#ffc764;
+}
+.mini-lv2{
+  background-color: #ffb396;
+}
+.mini-lv3{
+  background-color: #ff8585;
+}
+.mini-lv4{
+  background-color: #ff4646;
+}
 /* .row:after {
   content: "";
   display: table;
@@ -124,13 +140,13 @@ body, h1, h2, h3, h4, h5, h6, .mini-nav, .text-lato{
 /* ADMIN */
 
 .row-highlight-r {
-    background-color: rgba(249, 169, 95, 0.849) !important;
+  background-color: rgba(249, 169, 95, 0.849) !important;
 }
 .row-highlight-g {
-    background-color: rgba(95, 249, 164, 0.849) !important;
+  background-color: rgba(95, 249, 164, 0.849) !important;
 }
 .hdr-img{
-    width: 448px;
-    height: 296px;
-    overflow: hidden;
+  width: 448px;
+  height: 296px;
+  overflow: hidden;
 }
