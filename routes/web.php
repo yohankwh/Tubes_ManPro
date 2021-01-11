@@ -11,11 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 //GRAPHSTAT ROUTES
+Route::get('/', 'StatController@index')->name('index');
+Route::get('/statistik', 'StatController@statistik')->name('statistik');
+Route::get('/sebaran-kasus', 'StatController@sebaranKasus')->name('sebaran');
+
+//AJAX ROUTES
+Route::get('/index/data','StatController@getIndexChartData')->name('index.chart');
 
 //INFO ROUTES
 
@@ -40,6 +42,4 @@ Route::get('admin/importBulkKU','AdminController@bulkImportCSVKU');
 Route::get('admin/importBulkKD','AdminController@bulkImportCSVKD');
 Route::get('admin/importBulkDemo','AdminController@bulkImportCSVDemo');
 // Route::get('admin/kasus/create','AdminController@createKasus')->name('kasus.create');
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/berita/{id}','StatController@viewBerita')->name('stat.viewberita');
