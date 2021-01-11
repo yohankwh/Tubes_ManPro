@@ -39,4 +39,4 @@ Route::post('admin/kasus/create-ku','AdminController@inputKasusUmum')->name('kas
 Route::post('admin/kasus/create-kd','AdminController@inputKasusDaerah')->name('kasus.createKD');
 Route::post('admin/kasus/create-demo','AdminController@inputDemografi')->name('kasus.createDemo');
 // Route::get('admin/kasus/create','AdminController@createKasus')->name('kasus.create');
-Route::get('/berita/{id}','StatController@viewBerita')->name('stat.viewberita')
+Route::get('/berita/{id}','StatController@viewBerita')->name('stat.viewberita');

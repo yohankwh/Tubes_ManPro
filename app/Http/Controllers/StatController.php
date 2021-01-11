@@ -199,7 +199,7 @@ class StatController extends Controller
             ];
             return view('grafstat.berita')->with($data);    
         }else{
-            return redirect()->route(index);
+            return redirect()->route('index');
         }
     }
 }
