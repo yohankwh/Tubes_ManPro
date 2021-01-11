@@ -43,3 +43,5 @@ Route::get('admin/importBulkKD','AdminController@bulkImportCSVKD');
 Route::get('admin/importBulkDemo','AdminController@bulkImportCSVDemo');
 // Route::get('admin/kasus/create','AdminController@createKasus')->name('kasus.create');
 Route::get('/berita/{id}','StatController@viewBerita')->name('stat.viewberita');
+
+Auth::routes();

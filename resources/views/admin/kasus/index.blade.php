@@ -278,7 +278,8 @@ $(document).ready( function () {
             $(".edit-demo-btn").click(function(){
                 $('#input-demo').collapse('show');
                 let dateReverse = $(this).parent().text().trim().split('/')
-                tgl.val(dateReverse[2]+"-"+dateReverse[1]+"-"+dateReverse[0]);
+                tgl.val(dateReverse[0]);
+                console.log(tgl.val)
                 grupUmur.val($(this).parent().next().text());
                 positif.val($(this).parent().next().next().text());
                 meninggal.val($(this).parent().next().next().next().text());//lol, please find a better solution.
@@ -393,7 +394,7 @@ $(document).ready( function () {
             $(".edit-kd-btn").click(function(){
                 $('#input-daerah').collapse('show');
                 let dateReverse = $(this).parent().text().trim().split('/')
-                tgl.val(dateReverse[2]+"-"+dateReverse[1]+"-"+dateReverse[0]);
+                tgl.val(dateReverse[0]);
                 daerah.val($(this).parent().next().text());
                 positif.val($(this).parent().next().next().text());
                 sembuh.val($(this).parent().next().next().next().text());
@@ -491,7 +492,7 @@ $(document).ready( function () {
             $(".edit-ku-btn").click(function(){
                 $('#input-umum').collapse('show');
                 let dateReverse = $(this).parent().text().trim().split('/')
-                tgl.val(dateReverse[2]+"-"+dateReverse[1]+"-"+dateReverse[0]);
+                tgl.val(dateReverse[0]);
                 positif.val($(this).parent().next().text());
                 sembuh.val($(this).parent().next().next().text());
                 meninggal.val($(this).parent().next().next().next().text());//lol, please find a better solution.

@@ -17,6 +17,9 @@
 
 @section('content')
 <div class="p-2 my-2">
+  <div class="w3-container border shadow-sm rounded p-3 bg-white p-1" width="100%">
+    <canvas id="canvasUmum" width="400" height="100"></canvas>
+  </div>
   <div class="w3-container pt-2 pb-2 my-3">
     <div class="row text-left justify-content-around">
         <div class="col-3 rounded border p-3 mx-3 bg-salmon text-white">
@@ -35,9 +38,6 @@
             <h1 class="mb-0"><b>{{number_format($sum_umum->men,0,',','.')}}</b></h1>
         </div>
     </div>
-  </div>
-  <div class="w3-container border shadow-sm rounded p-3 bg-white mb-5 p-1" width="100%">
-    <canvas id="canvasUmum" width="400" height="100"></canvas>
   </div>
   <div class="rounded border px-1 py-2 text-left bg-white mb-5">
     <h5 class="ml-2"><b>Demografi Umur</b></h5>
