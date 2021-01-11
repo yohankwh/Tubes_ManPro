@@ -60,9 +60,9 @@ class StatController extends Controller
         }
 
         $sum_umum = DB::table("kasus_umum")
-            ->select(DB::raw("SUM(positif) as pos"), DB::raw("SUM(sembuh) as sem"), DB::raw("SUM(meninggal) as men"))
-            ->get()[0];
-
+	    ->select(DB::raw("SUM(positif) as pos"),DB::raw("SUM(sembuh) as sem"),DB::raw("SUM(meninggal) as men"))
+        ->get()[0];
+        
         $demo_data = DB::table('demografi')
             ->select('kel_umur', DB::raw("SUM(positif) as pos"), DB::raw("SUM(meninggal) as men"))
             ->groupBy('kel_umur')
@@ -110,9 +110,9 @@ class StatController extends Controller
             $data = [
                 'berita' => $news
             ];
-            return view('grafstat.berita')->with($data);
-        } else {
-            return redirect()->route('index');
+            return view('grafstat.berita')->with($data);    
+        }else{
+            return redirect()->route("index");
         }
     }
 }

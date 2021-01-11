@@ -202,22 +202,22 @@
 <div class="py-3">
     <h2>Berita</h2>
     <div class="text-left p-2 row justify-content-around" style="margin:0 auto">
-        @foreach($all_berita as $berita)
-        <div class="col-3 px-0 shadow-sm bg-white rounded" style="overflow:hidden">
-            <div style="height:186px;overflow:hidden">
-                <a href="{{route('stat.viewberita',$berita->id)}}">
-                    <img height="184px" style="object-fit:cover" src="{{asset('/img/berita/'.$berita->header_image)}}">
-                </a>
-            </div>
-            <div class="p-2">
-                <a href="{{route('stat.viewberita',$berita->id)}}">
-                    <h5 class="mb-2 line-clamp clamp-2"><b>{{$berita->title}}</b></h5>
-                </a>
-                <small>{{date("l, d M Y",strtotime($berita->created_at))}}</small>
-                <p class="mt-2 mb-0 clamp-3">{{Illuminate\Support\Str::limit($berita->content,80)}}</p>
-            </div>
+    @foreach($all_berita as $berita)
+    <div class="col-3 px-0 shadow-sm bg-white">
+        <div style="height:186px;overflow:hidden">
+            <a href="{{route('stat.viewberita',$berita->id)}}">
+                <img height="184px" style="object-fit:cover" src="{{asset('/img/berita/'.$berita->header_image)}}">
+            </a>
         </div>
-        @endforeach
+        <div class="p-2">
+            <a href="{{route('stat.viewberita',$berita->id)}}">
+                <h5 class="mb-2 line-clamp clamp-2"><b>{{$berita->title}}</b></h5>
+            </a>
+            <small>{{date("l, d M Y",strtotime($berita->created_at))}}</small>
+            <p class="mt-2 mb-0 clamp-3">{{Illuminate\Support\Str::limit($berita->content,80)}}</p>
+        </div>
+    </div>
+    @endforeach
     </div>
 </div>
 <script>
@@ -240,9 +240,7 @@
 </script>
 <script>
     var timeFormat = 'YYYY-MM-DD';
-    var posData = {
-        !!json_encode($pos_data) !!
-    }
+    var posData = {!!json_encode($pos_data)!!}
     var dates = new Array();
     var cases = new Array();
     posData.forEach(function(item) {

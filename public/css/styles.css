@@ -39,6 +39,19 @@ input::-webkit-inner-spin-button {
     -webkit-line-clamp: 3;
 }
 
+.line-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+}
+
+.clamp-2{
+  -webkit-line-clamp: 2;
+}
+.clamp-3{
+  -webkit-line-clamp: 3;
+}
+
 .ctable {
     border-collapse: collapse;
     width: 100%;

@@ -19,21 +19,21 @@
 <div class="p-2 my-2">
   <div class="w3-container pt-2 pb-2 my-3">
     <div class="row text-left justify-content-around">
-      <div class="col-3 rounded border p-3 mx-3 bg-salmon text-white">
-        <small>Jumlah Pasien</small>
-        <p class="mb-0"><b>Positif</b></p>
-        <h1 class="mb-0"><b>{{number_format($sum_umum->pos,0,',','.')}}</b></h1>
-      </div>
-      <div class="col-3 rounded border p-3 mx-3 bg-seafoam text-white">
-        <small>Jumlah Pasien</small>
-        <p class="mb-0"><b>Sembuh</b></p>
-        <h1 class="mb-0"><b>{{number_format($sum_umum->sem,0,',','.')}}</b></h1>
-      </div>
-      <div class="col-3 rounded border p-3 mx-3 bg-dark text-white">
-        <small>Jumlah Pasien</small>
-        <p class="mb-0"><b>Meninggal</b></p>
-        <h1 class="mb-0"><b>{{number_format($sum_umum->men,0,',','.')}}</b></h1>
-      </div>
+        <div class="col-3 rounded border p-3 mx-3 bg-salmon text-white">
+            <small>Jumlah Pasien</small>
+            <p class="mb-0"><b>Positif</b></p>
+            <h1 class="mb-0"><b>{{number_format($sum_umum->pos,0,',','.')}}</b></h1>
+        </div>
+        <div class="col-3 rounded border p-3 mx-3 bg-seafoam text-white">
+            <small>Jumlah Pasien</small>
+            <p class="mb-0"><b>Sembuh</b></p>
+            <h1 class="mb-0"><b>{{number_format($sum_umum->sem,0,',','.')}}</b></h1>
+        </div>
+        <div class="col-3 rounded border p-3 mx-3 bg-dark text-white">
+            <small>Jumlah Pasien</small>
+            <p class="mb-0"><b>Meninggal</b></p>
+            <h1 class="mb-0"><b>{{number_format($sum_umum->men,0,',','.')}}</b></h1>
+        </div>
     </div>
   </div>
   <div class="w3-container border shadow-sm rounded p-3 bg-white mb-5 p-1" width="100%">
@@ -98,15 +98,9 @@
   var ctxDemo = document.getElementById('demoChart').getContext('2d');
   var ctxUmum = document.getElementById('canvasUmum').getContext('2d');
   var ctxDaerah = document.getElementById('canvasDaerah').getContext('2d');
-  var data = {
-    !!json_encode($demo_data) !!
-  }
-  var kasus = {
-    !!json_encode($kasus_umum) !!
-  }
-  var kasusDaerah = {
-    !!json_encode($kasus_daerah) !!
-  }
+  var data = {!! json_encode($demo_data) !!}
+  var kasus = {!! json_encode($kasus_umum) !!}
+  var kasusDaerah = {!! json_encode($kasus_daerah) !!}
 
   var selObj = document.getElementById('sel-obj');
   let i = 0;
@@ -122,10 +116,10 @@
     }
   })
 
-  function refreshDaerahChart() {
-    window.chartDaerah.data = getNewDataDaerah(selObj.value);
-    window.chartDaerah.options.title.text = "Kasus COVID-19 " + selObj.value,
-      window.chartDaerah.update();
+  function refreshDaerahChart(){
+    window.chartDaerah.data=getNewDataDaerah(selObj.value);
+    window.chartDaerah.options.title.text="Kasus COVID-19 "+selObj.value,
+    window.chartDaerah.update();
   }
 </script>
 <script>
@@ -169,25 +163,18 @@
       }
     }
   });
-
-  $(document).ready(function() {
-    $('#demoTable').DataTable({
-      "paging": false,
-      "info": false,
-      "searching": false,
-      "columns": [{
-          "width": "20%"
-        },
-        {
-          "width": "60%"
-        },
-        {
-          "width": "30%"
-        },
-      ],
-      "order": [
-        [1, "desc"]
-      ]
+  
+  $(document).ready( function () {
+    $('#demoTable').DataTable( {
+        "paging":   false,
+        "info":     false,
+        "searching": false,
+        "columns": [
+          { "width": "20%" },
+          { "width": "60%" },
+          { "width": "30%" },
+        ],
+        "order": [[ 1, "desc" ]]
     });
 
   });
