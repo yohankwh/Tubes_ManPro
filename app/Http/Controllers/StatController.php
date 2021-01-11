@@ -190,4 +190,16 @@ class StatController extends Controller
         ];
         return view('grafstat.sebaran')->with($data);
     }
+
+    public function viewBerita($id){
+        $news = Berita::where('id',$id)->first();
+        if($news){
+            $data = [
+                'berita' => $news
+            ];
+            return view('grafstat.berita')->with($data);    
+        }else{
+            return redirect()->route(index);
+        }
+    }
 }
