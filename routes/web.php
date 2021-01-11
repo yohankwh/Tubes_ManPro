@@ -30,10 +30,16 @@ Route::get('/admin/berita/{slug}','AdminController@viewBerita')->name('berita.vi
 Route::post('/admin/berita/{slug}','AdminController@updateBerita')->name('berita.update');
 Route::post('/admin/berita/{slug}/delete','AdminController@deleteBerita')->name('berita.delete');
 Route::get('/admin/berita/{slug}/edit','AdminController@editBerita')->name('berita.edit');
-Route::post('/admin/berita/{slug}','AdminController@updateBerita')->name('berita.update');
+Route::put('/admin/berita/{slug}','AdminController@updateBerita')->name('berita.update');
 
 Route::get('admin/kasus','AdminController@kasus')->name('admin.kasus');
 Route::post('admin/kasus/create-ku','AdminController@inputKasusUmum')->name('kasus.createKU');
 Route::post('admin/kasus/create-kd','AdminController@inputKasusDaerah')->name('kasus.createKD');
 Route::post('admin/kasus/create-demo','AdminController@inputDemografi')->name('kasus.createDemo');
+Route::get('admin/importBulkKU','AdminController@bulkImportCSVKU');
+Route::get('admin/importBulkKD','AdminController@bulkImportCSVKD');
+Route::get('admin/importBulkDemo','AdminController@bulkImportCSVDemo');
 // Route::get('admin/kasus/create','AdminController@createKasus')->name('kasus.create');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

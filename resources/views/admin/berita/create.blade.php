@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- Page Heading -->
-<div class="container">
+<div class="container my-5">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 mt-3 text-gray-800"><b>Tulis Berita Baru</b></h1>
     </div>
