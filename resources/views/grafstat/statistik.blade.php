@@ -11,6 +11,7 @@
   <div class="">
     <p class="text-white text-lato" style="font-size:2.6rem">Statistik Data COVID-19</p>
     <p class="text-white" style="font-size:1.2em">Statistik Data Perkembangan Kasus COVID-19</p>
+    <small class="text-white" >Data update terakhir: <b>{{date("d F Y",strtotime($tanggal))}}</b></small>
   </div>
 </div>
 @endsection
@@ -77,7 +78,7 @@
   </div>
   <div class="rounded border px-1 py-2 text-left bg-white">
     <div class="d-flex justify-content-between px-3 pt-2">
-      <h5><b>Kasus Positif Daerah</b></h5>
+      <h5><b>Kasus Positif Provinsi</b></h5>
       <select id="sel-obj" class="custom-select w-25" onchange="refreshDaerahChart()">
         <option value="Seoul" selected>Seoul</option>
       </select>

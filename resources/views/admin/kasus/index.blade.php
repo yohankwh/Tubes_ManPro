@@ -322,7 +322,7 @@ $(document).ready( function () {
                             if(data['type']=="default"){//if input was default
                                 tKasusDemo.row.add( [
                                     data['date']+getEditBtn(data['targetId']),
-                                    grupUmur.val(),
+                                    grupUmur.val()+"s",
                                     positif.val(),
                                     meninggal.val()
                                 ] ).draw( false );

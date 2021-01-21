@@ -20,6 +20,7 @@ crossorigin=""></script>
   <div class="">
       <p class="text-white text-lato" style="font-size:2.6rem">Sebaran Kasus COVID-19</p>
       <p class="text-white" style="font-size:1.2em">Peta Persebaran Kasus COVID-19</p>
+      <small class="text-white" >Data update terakhir: <b>{{date("d F Y",strtotime($tanggal))}}</b></small>
   </div>
 </div>
 @endsection
@@ -53,12 +54,12 @@ crossorigin=""></script>
         <div class="row justify-content-around">
           <div class="col-sm-12 bg-white w3-round-xlarge mb-5" style="height:586px;">
             <div class="py-2">
-              <h5><b>Jumlah Kasus Daerah</b></h5>
+              <h5><b>Jumlah Kasus Provinsi</b></h5>
               <div class="p-2">
                 <table id="daerah_k">
                   <thead>
                     <tr>
-                      <th>Daerah</th>
+                      <th>Provinsi</th>
                       <th>Positif</th>
                       <th>Sembuh</th>
                       <th>Meninggal</th>

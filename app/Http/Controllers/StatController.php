@@ -80,7 +80,8 @@ class StatController extends Controller
             'demo_sum_pos' => json_decode($sum_demo)[0]->pos,
             'sum_umum' => $sum_umum,
             'kasus_umum' => $kasus_umum,
-            'kasus_daerah' => $kasus_daerah_parsed
+            'kasus_daerah' => $kasus_daerah_parsed,
+            'tanggal' => Demografi::first()->tanggal
         ];
 
         return view('grafstat.statistik')->with($data);
@@ -98,7 +99,8 @@ class StatController extends Controller
             ->get();
         $data = [
             'sum_daerah'  => $sum_daerah,
-            'all_data' => $all_daerah
+            'all_data' => $all_daerah,
+            'tanggal' => KasusDaerah::first()->tanggal
         ];
         return view('grafstat.sebaran')->with($data);
     }
